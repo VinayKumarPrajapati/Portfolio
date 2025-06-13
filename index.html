@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Prajapati - Senior Backend Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background particles */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(0, 255, 255, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 0, 255, 0.8); }
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease 0.5s forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: slideUp 1s ease 1s forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: slideUp 1s ease 1.5s forwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #00ffff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .profile-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            margin-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #00ffff, #ff00ff);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .experience-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            color: #00ffff;
+            font-weight: 600;
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #ff00ff;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .job-description {
+            list-style: none;
+        }
+
+        .job-description li {
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .job-description li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: #00ffff;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 255, 0.4));
+            transform: scale(1.05);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .project-header {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            color: #ff00ff;
+            font-size: 0.9rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(0, 255, 255, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        /* Ideas Section */
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .idea-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .idea-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .idea-card:hover::before {
+            left: 100%;
+        }
+
+        .idea-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(0, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+        }
+
+        .idea-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .idea-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-right: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .idea-title {
+            font-size: 1.8rem;
+            color: #00ffff;
+            font-weight: 700;
+        }
+
+        .idea-subtitle {
+            color: #ff00ff;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .idea-description {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .idea-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .idea-tag {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .idea-tag:hover {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 255, 0.4));
+            transform: scale(1.05);
+        }
+
+        .view-details-btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-details-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .view-details-btn:hover::before {
+            left: 100%;
+        }
+
+        .view-details-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 2rem;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            text-align: center;
+            background: rgba(0, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .use-cases {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .use-case {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .use-case:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.5);
+            transform: translateX(10px) translateY(0);
+        }
+
+        .use-case-number {
+            position: absolute;
+            top: -10px;
+            left: 1rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .use-case h4 {
+            color: #00ffff;
+            margin-bottom: 1rem;
+            margin-left: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .use-case p {
+            margin-left: 2rem;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        /* Scrollbar Styling for Modal */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border-radius: 10px;
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .education-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+
+        .degree {
+            font-size: 1.2rem;
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .institution {
+            color: #ff00ff;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Technical Deep Dive Styles */
+        .tech-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .tech-section-title {
+            font-size: 2rem;
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .tech-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border-radius: 2px;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .tech-card h4 {
+            color: #ff00ff;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .highlight-tag {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-tag:hover {
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.5), rgba(255, 0, 255, 0.5));
+            transform: scale(1.05);
+        }
+
+        /* Algorithms Section */
+        .algorithms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .algo-category {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .algo-category:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 0, 255, 0.5);
+        }
+
+        .algo-category h4 {
+            color: #ff00ff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .algo-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .algo-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .algo-list li::before {
+            content: '🔹';
+            position: absolute;
+            left: 0;
+            color: #00ffff;
+        }
+
+        .algo-list li:hover {
+            color: #00ffff;
+            transform: translateX(5px);
+        }
+
+        /* NodeJS Section */
+        .nodejs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .nodejs-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nodejs-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 255, 0, 0.5);
+        }
+
+        .nodejs-card h4 {
+            color: #00ff00;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .code-snippet {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            margin-top: 1rem;
+        }
+
+        .code-line {
+            display: block;
+            color: #00ff00;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .framework-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .framework-tag {
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 255, 0.2));
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+        }
+
+        .perf-metrics {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #00ff00;
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* MongoDB Section */
+        .mongodb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .mongo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mongo-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 255, 0, 0.5);
+        }
+
+        .mongo-card h4 {
+            color: #4DB33D;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mongo-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mongo-features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .mongo-features li::before {
+            content: '🍃';
+            position: absolute;
+            left: 0;
+        }
+
+        .mongo-features li:hover {
+            color: #4DB33D;
+            transform: translateX(5px);
+        }
+
+        /* Cloud Section */
+        .cloud-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cloud-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cloud-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 165, 0, 0.5);
+        }
+
+        .cloud-card h4 {
+            color: #FF9900;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .aws-services, .gcp-services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .service-group {
+            background: rgba(255, 165, 0, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        .service-group h5 {
+            color: #FF9900;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .service-group span {
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        .devops-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-tag {
+            background: linear-gradient(45deg, rgba(255, 165, 0, 0.2), rgba(0, 255, 255, 0.2));
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 165, 0, 0.3);
+        }
+
+        /* GitHub Section */
+        .github-showcase {
+            margin-top: 1.5rem;
+        }
+
+        .github-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .github-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .github-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .github-header h4 {
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .github-link {
+            background: linear-gradient(45deg, #333, #555);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .github-link:hover {
+            background: linear-gradient(45deg, #555, #777);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .repo-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .repo-item:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(0, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .repo-item h5 {
+            color: #00ffff;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .repo-item p {
+            color: #ccc;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .repo-stats {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .repo-stats span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-method {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            min-width: 120px;
+        }
+
+        .contact-method:hover {
+            background: rgba(0, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.2rem; }
+            .about-content { grid-template-columns: 1fr; text-align: center; }
+            .nav-links { display: none; }
+            .timeline { margin-left: 1rem; }
+            .contact-methods { flex-direction: column; align-items: center; }
+            
+            /* Technical section responsive */
+            .tech-grid { grid-template-columns: 1fr; }
+            .algorithms-grid { grid-template-columns: 1fr; }
+            .nodejs-grid { grid-template-columns: 1fr; }
+            .mongodb-grid { grid-template-columns: 1fr; }
+            .cloud-grid { grid-template-columns: 1fr; }
+            .repo-grid { grid-template-columns: 1fr; }
+            
+            /* Ideas section responsive */
+            .ideas-grid { grid-template-columns: 1fr; }
+            .modal-content { 
+                width: 95%; 
+                padding: 1.5rem; 
+            }
+            .modal-title { 
+                font-size: 2rem; 
+            }
+            .use-case h4 { 
+                margin-left: 1rem; 
+            }
+            .use-case p { 
+                margin-left: 1rem; 
+            }
+            
+            .github-header { 
+                flex-direction: column; 
+                text-align: center; 
+            }
+            
+            .aws-services, .gcp-services { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .perf-metrics { 
+                flex-direction: column; 
+                gap: 0.5rem; 
+            }
+            
+            .tech-section-title { 
+                font-size: 1.5rem; 
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Animation for modal content */
+        .use-case {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUpModal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">VP</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#ideas">Ideas</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#technical">Technical Deep Dive</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Vinay Prajapati</h1>
+            <h2>Senior Backend Developer & Tech Entrepreneur</h2>
+            <p>Architecting scalable solutions with cutting-edge technologies. From microservices to AI-powered backends, I build systems that drive innovation.</p>
+            <a href="#contact" class="cta-button">Let's Connect</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-image">
+                <div class="profile-card">
+                    <div class="profile-img">VP</div>
+                    <div class="contact-info">
+                        <div class="contact-item">📧 vinay91098@gmail.com</div>
+                        <div class="contact-item">📱 9876386345</div>
+                        <div class="contact-item">🌍 Bangalore, India</div>
+                        <div class="contact-item">💻 GitHub</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text">
+                <h3>Passionate Backend Architect</h3>
+                <p>With 5+ years of experience in backend development, I specialize in building robust, scalable systems that power modern applications. Currently serving as a Senior Backend Developer at HireQuotient, I've architected solutions that handle massive user loads while maintaining optimal performance.</p>
+                <p>My journey includes founding Sagaipoint, a full-stack matrimonial platform serving 1400+ active users, and contributing to major companies like Delhivery and Rigi. I'm passionate about leveraging cutting-edge technologies like AI/ML integration, microservices architecture, and cloud-native solutions.</p>
+                <p>I thrive on solving complex technical challenges and transforming innovative ideas into production-ready systems that make a real impact.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="fade-in">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="experience-card">
+                    <div class="job-title">Senior Back-End Developer</div>
+                    <div class="company">HireQuotient</div>
+                    <div class="duration">March 2023 - Present | Bangalore, India</div>
+                    <ul class="job-description">
+                        <li>Built EasySource backend architecture from scratch and developed 40+ core features</li>
+                        <li>Led development of AI-powered backend features incorporating machine learning capabilities for automated background checks and intelligent lead scoring</li>
+                        <li>Implemented OAuth 2.0 authentication system for email, Calendly, Slack, and other service integrations</li>
+                        <li>Integrated multiple Applicant Tracking Systems (ATS) and developed server-sent events (SSE) for real-time data updates</li>
+                        <li>Established scalable infrastructure using GCP and AWS (Lambda, S3, EC2, Firebase) to handle increased user load securely</li>
+                        <li>Optimized application performance by implementing Redis caching system, significantly enhancing data retrieval speeds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="experience-card">
+                    <div class="job-title">Back-End Developer</div>
+                    <div class="company">Rigi</div>
+                    <div class="duration">Sept 2022 - Feb 2023 | Bengaluru, India</div>
+                    <ul class="job-description">
+                        <li>Developed critical backend components including IVR integration, report service, and push notification system</li>
+                        <li>Built offerings APIs and real-time data streaming solutions with Redis caching implementation</li>
+                        <li>Utilized AWS services (Lambda, S3, EC2) and cloud-native solutions to enhance system scalability and reliability</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="experience-card">
+                    <div class="job-title">Founder / Developer</div>
+                    <div class="company">Sagaipoint</div>
+                    <div class="duration">Oct 2020 - Sept 2022 | Ahmedabad, India</div>
+                    <ul class="job-description">
+                        <li>Built full-stack matrimonial website using ReactJS, NodeJS, Express, and MongoDB</li>
+                        <li>Implemented robust security features and customized community-specific filters</li>
+                        <li>Successfully served 1400+ active users with deployed microservices architecture on AWS</li>
+                        <li>Enhanced reliability and scalability through strategic technical decisions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="experience-card">
+                    <div class="job-title">Developer (Java, Spring Boot)</div>
+                    <div class="company">Delhivery</div>
+                    <div class="duration">March 2020 - Oct 2020 | Hyderabad, India</div>
+                    <ul class="job-description">
+                        <li>Developed Participant Account system with seamless service integration</li>
+                        <li>Implemented AAA (Authentication, Authorization, Accounting) for enhanced data security</li>
+                        <li>Designed database structures through ERD modeling and automated project setup with YAML configuration</li>
+                        <li>Built solutions using Java, SpringBoot, PostgreSQL, Cassandra, Kafka, and ElasticSearch with CI/CD</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="experience-card">
+                    <div class="job-title">Intern</div>
+                    <div class="company">SAC-ISRO</div>
+                    <div class="duration">Jan 2019 - May 2019 | Ahmedabad, India</div>
+                    <ul class="job-description">
+                        <li>Analyzed satellite reflection data to create Vegetation Indices and improved classification accuracy</li>
+                        <li>Developed PyQt-based application for data analysis and visualization of remote sensing data</li>
+                        <li>Enhanced feature selection techniques on diverse datasets</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in">
+        <h2 class="section-title">Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Backend Technologies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">NodeJS</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">SpringBoot</span>
+                    <span class="skill-tag">NestJS</span>
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Python</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Cloud & DevOps</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">GCP</span>
+                    <span class="skill-tag">Lambda</span>
+                    <span class="skill-tag">S3</span>
+                    <span class="skill-tag">EC2</span>
+                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag">RabbitMQ</span>
+                    <span class="skill-tag">Redis</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Databases</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Cassandra</span>
+                    <span class="skill-tag">ElasticSearch</span>
+                    <span class="skill-tag">Kafka</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Frontend Technologies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">ReactJS</span>
+                    <span class="skill-tag">jQuery</span>
+                    <span class="skill-tag">Material-UI</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Specializations</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">System Design</span>
+                    <span class="skill-tag">Microservices</span>
+                    <span class="skill-tag">API Development</span>
+                    <span class="skill-tag">Data Structures</span>
+                    <span class="skill-tag">OAuth 2.0</span>
+                    <span class="skill-tag">CI/CD</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>AI/ML Integration</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Machine Learning</span>
+                    <span class="skill-tag">Automated Background Checks</span>
+                    <span class="skill-tag">Intelligent Lead Scoring</span>
+                    <span class="skill-tag">Workflow Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="fade-in">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">HelpNet</div>
+                    <div class="project-subtitle">Location-Based Platform</div>
+                </div>
+                <div class="project-content">
+                    <p>Developed a comprehensive full-stack application that connects help seekers with nearby helpers using advanced location tracking technology. The platform facilitates real-time matching and secure payment processing.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">NodeJS</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">ReactJS</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Material-UI</span>
+                        <span class="tech-tag">Google Maps API</span>
+                        <span class="tech-tag">Razorpay</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">EasySource Backend</div>
+                    <div class="project-subtitle">AI-Powered Recruitment Platform</div>
+                </div>
+                <div class="project-content">
+                    <p>Architected and built from scratch the complete backend infrastructure for EasySource, incorporating AI-powered features for automated background checks, intelligent lead scoring, and workflow management systems.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">NodeJS</span>
+                        <span class="tech-tag">Machine Learning</span>
+                        <span class="tech-tag">OAuth 2.0</span>
+                        <span class="tech-tag">GCP</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">RabbitMQ</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-title">Sagaipoint Platform</div>
+                    <div class="project-subtitle">Full-Stack Matrimonial Website</div>
+                </div>
+                <div class="project-content">
+                    <p>Founded and developed a comprehensive matrimonial platform serving 1400+ active users. Implemented robust security features, customized community-specific filters, and deployed using microservices architecture on AWS.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ReactJS</span>
+                        <span class="tech-tag">NodeJS</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">AWS</span>
+                        <span class="tech-tag">Microservices</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ideas & Innovations Section -->
+    <section id="ideas" class="fade-in">
+        <h2 class="section-title">Ideas & Innovations</h2>
+        
+        <div class="ideas-grid">
+            <!-- HelpNet Idea Card -->
+            <div class="idea-card" onclick="openModal('helpnet')">
+                <div class="idea-header">
+                    <div class="idea-icon">🌐</div>
+                    <div>
+                        <div class="idea-title">HelpNet</div>
+                        <div class="idea-subtitle">Location-Based Community Support Platform</div>
+                    </div>
+                </div>
+                
+                <div class="idea-description">
+                    A revolutionary platform connecting help seekers with nearby helpers in real-time. From medical emergencies to local services, HelpNet creates a community-driven ecosystem where people can give and receive assistance based on location, expertise, and availability.
+                </div>
+                
+                <div class="idea-tags">
+                    <span class="idea-tag">Real-time Matching</span>
+                    <span class="idea-tag">Location-based</span>
+                    <span class="idea-tag">Community Support</span>
+                    <span class="idea-tag">Emergency Services</span>
+                    <span class="idea-tag">Social Impact</span>
+                </div>
+                
+                <button class="view-details-btn">
+                    🔍 Explore Full Concept
+                </button>
+            </div>
+            
+            <!-- Placeholder for more ideas -->
+            <div class="idea-card" style="opacity: 0.5; cursor: not-allowed;">
+                <div class="idea-header">
+                    <div class="idea-icon">🚀</div>
+                    <div>
+                        <div class="idea-title">More Ideas Coming Soon</div>
+                        <div class="idea-subtitle">Innovative Solutions in Development</div>
+                    </div>
+                </div>
+                
+                <div class="idea-description">
+                    Stay tuned for more groundbreaking ideas and innovative solutions that aim to solve real-world problems through technology and community collaboration.
+                </div>
+                
+                <div class="idea-tags">
+                    <span class="idea-tag">Innovation</span>
+                    <span class="idea-tag">Technology</span>
+                    <span class="idea-tag">Future</span>
+                </div>
+                
+                <button class="view-details-btn" disabled style="opacity: 0.5;">
+                    🔮 Coming Soon
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- HelpNet Modal -->
+    <div id="helpnet-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🌐 HelpNet - Detailed Concept</h3>
+                <button class="close-btn" onclick="closeModal('helpnet')">&times;</button>
+            </div>
+            
+            <div class="modal-description">
+                <strong>"One of the Real Uses of the Internet"</strong><br>
+                A comprehensive platform where people needing help connect with those willing to provide assistance, leveraging location-based matching, real-time communication, and community-driven support systems.
+            </div>
+            
+            <div class="use-cases">
+                <div class="use-case">
+                    <div class="use-case-number">1</div>
+                    <h4>🏥 Medical Emergency Support</h4>
+                    <p>Urgent medical supply requests (oxygen pumps, blood, medications) with <span class="highlight">real-time location tracking</span>. Hospitals and medical facilities can request immediate assistance from nearby registered donors or medical suppliers with time-critical alerts.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">2</div>
+                    <h4>🚚 Inter-city Document & Product Transfer</h4>
+                    <p>Connect people traveling between cities to transport <span class="highlight">urgent documents or lightweight products</span>. Smart matching based on flight schedules and travel plans with verification through government proofs and mutual agreements.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">3</div>
+                    <h4>🤝 NGO Integration & Social Support</h4>
+                    <p>Direct connection platform for NGOs with <span class="highlight">comprehensive filtering systems</span>. People seeking or offering help can connect with registered NGOs based on specific needs, location, and support categories.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">4</div>
+                    <h4>🏆 Recognition & Appreciation Dashboard</h4>
+                    <p>Gamified system tracking helpful community members with <span class="highlight">government recommendations</span>. Recognition dashboard showcasing top helpers, potentially connecting them with award functions and official recognition programs.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">5</div>
+                    <h4>💡 Real-time Consultation & Advice</h4>
+                    <p>Immediate access to guidance for <span class="highlight">financial, relationship, and career challenges</span>. Filter-based matching with qualified advisors and experienced community members for urgent decision-making support.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">6</div>
+                    <h4>👨‍💼 Professional Services On-Demand</h4>
+                    <p>Instant access to <span class="highlight">freelancers, tutors, babysitters, doctors</span> and other service providers. Location-based real-time matching with verified professionals for immediate service requirements.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">7</div>
+                    <h4>⚽ Sports Team Formation & Management</h4>
+                    <p>Local sports team recruitment for <span class="highlight">soccer, cricket, basketball</span> and other activities. Team performance tracking and management system with potential future analytics and development programs.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">8</div>
+                    <h4>🔧 Home & Office Services</h4>
+                    <p>Quick assistance for <span class="highlight">installations, tech support, equipment loans</span> (chargers, bikes, cars). Short-term rental and service marketplace for immediate needs and emergency situations.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">9</div>
+                    <h4>💰 Peer-to-Peer Lending Platform</h4>
+                    <p>Community-driven lending with <span class="highlight">CIBIL score integration</span>. Risk-assessed lending cycles with transparent interest rates, borrowing history, and reputation-based trust systems.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">10</div>
+                    <h4>💼 Local Employment Marketplace</h4>
+                    <p>Location-based job matching for <span class="highlight">part-time and full-time opportunities</span>. Advanced filtering system connecting local employers with job seekers based on proximity, skills, and availability.</p>
+                </div>
+                
+                <div class="use-case">
+                    <div class="use-case-number">11</div>
+                    <h4>💳 Integrated Payment & Bargaining System</h4>
+                    <p>Secure escrow payment system with <span class="highlight">post-service release and negotiation features</span>. Money held in company account until service completion, with optional bargaining mechanisms for flexible pricing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <section id="education" class="fade-in">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <div class="degree">B.Tech in Computer Science Engineering</div>
+                <div class="institution">LPU (Lovely Professional University)</div>
+                <div class="duration">May 2019 | Jalandhar, India</div>
+            </div>
+            
+            <div class="education-card">
+                <div class="degree">Diploma in Computer Engineering</div>
+                <div class="institution">Nirma University</div>
+                <div class="duration">May 2016 | Ahmedabad, India</div>
+            </div>
+            
+            <div class="education-card">
+                <div class="degree">Advanced Software Development</div>
+                <div class="institution">Scalar Academy</div>
+                <div class="duration">May 2019 - 2020</div>
+                <p>Data Structures, System Design, Databases, Java, SpringBoot, ReactJS</p>
+            </div>
+            
+            <div class="education-card">
+                <div class="degree">Advanced Software Development</div>
+                <div class="institution">UpGrad</div>
+                <div class="duration">May 2019 - Jan 2020</div>
+                <p>ReactJS, Java, SpringBoot, Backend Integration</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Deep Dive Section -->
+    <section id="technical" class="fade-in">
+        <h2 class="section-title">Technical Deep Dive</h2>
+        
+        <!-- System Design Expertise -->
+        <div class="tech-section">
+            <h3 class="tech-section-title">System Design & Architecture</h3>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h4>Microservices Architecture</h4>
+                    <p>Designed and implemented scalable microservices using Docker containers, Kubernetes orchestration, and service mesh patterns. Built resilient systems with circuit breakers, load balancing, and auto-scaling capabilities.</p>
+                    <div class="tech-highlights">
+                        <span class="highlight-tag">Docker</span>
+                        <span class="highlight-tag">Kubernetes</span>
+                        <span class="highlight-tag">Service Mesh</span>
+                        <span class="highlight-tag">Load Balancing</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>Distributed Systems</h4>
+                    <p>Expertise in building fault-tolerant distributed systems with eventual consistency, CQRS patterns, and event sourcing. Implemented distributed caching, message queues, and consensus algorithms.</p>
+                    <div class="tech-highlights">
+                        <span class="highlight-tag">CQRS</span>
+                        <span class="highlight-tag">Event Sourcing</span>
+                        <span class="highlight-tag">CAP Theorem</span>
+                        <span class="highlight-tag">Consensus</span>
+                    </div>
+                </div>
+                
+                <div class="tech-card">
+                    <h4>Scalability Patterns</h4>
+                    <p>Applied horizontal and vertical scaling strategies, database sharding, read replicas, and CDN implementation. Optimized systems to handle millions of concurrent users with sub-second response times.</p>
+                    <div class="tech-highlights">
+                        <span class="highlight-tag">Sharding</span>
+                        <span class="highlight-tag">Read Replicas</span>
+                        <span class="highlight-tag">CDN</span>
+                        <span class="highlight-tag">Caching</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Structures & Algorithms -->
+        <div class="tech-section">
+            <h3 class="tech-section-title">Data Structures & Algorithms</h3>
+            <div class="algorithms-grid">
+                <div class="algo-category">
+                    <h4>Advanced Data Structures</h4>
+                    <ul class="algo-list">
+                        <li>B-Trees & B+ Trees for database indexing</li>
+                        <li>Trie structures for autocomplete features</li>
+                        <li>Bloom filters for efficient lookups</li>
+                        <li>Consistent hashing for distributed systems</li>
+                        <li>Skip lists for sorted data structures</li>
+                    </ul>
+                </div>
+                
+                <div class="algo-category">
+                    <h4>Algorithm Optimization</h4>
+                    <ul class="algo-list">
+                        <li>Dynamic programming for complex problem solving</li>
+                        <li>Graph algorithms for social networks</li>
+                        <li>String matching algorithms for search</li>
+                        <li>Sorting & searching optimizations</li>
+                        <li>Greedy algorithms for resource allocation</li>
+                    </ul>
+                </div>
+                
+                <div class="algo-category">
+                    <h4>Complexity Analysis</h4>
+                    <ul class="algo-list">
+                        <li>Big O notation mastery</li>
+                        <li>Time & space complexity optimization</li>
+                        <li>Amortized analysis techniques</li>
+                        <li>Performance benchmarking</li>
+                        <li>Algorithm selection strategies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- NodeJS Expertise -->
+        <div class="tech-section">
+            <h3 class="tech-section-title">NodeJS Mastery</h3>
+            <div class="nodejs-grid">
+                <div class="nodejs-card">
+                    <h4>Core NodeJS</h4>
+                    <p>Deep understanding of Node.js event loop, non-blocking I/O, streams, and buffer management. Built high-performance applications handling thousands of concurrent connections.</p>
+                    <div class="code-snippet">
+                        <span class="code-line">// Event-driven architecture</span>
+                        <span class="code-line">const EventEmitter = require('events');</span>
+                        <span class="code-line">// Stream processing</span>
+                        <span class="code-line">const stream = require('stream');</span>
+                    </div>
+                </div>
+                
+                <div class="nodejs-card">
+                    <h4>Express.js & Frameworks</h4>
+                    <p>Advanced middleware development, custom authentication systems, rate limiting, and API security. Built RESTful and GraphQL APIs with comprehensive testing suites.</p>
+                    <div class="framework-tags">
+                        <span class="framework-tag">Express.js</span>
+                        <span class="framework-tag">NestJS</span>
+                        <span class="framework-tag">Fastify</span>
+                        <span class="framework-tag">Koa.js</span>
+                    </div>
+                </div>
+                
+                <div class="nodejs-card">
+                    <h4>Performance Optimization</h4>
+                    <p>Memory leak detection, CPU profiling, cluster mode implementation, and worker threads for CPU-intensive tasks. Optimized applications for maximum throughput.</p>
+                    <div class="perf-metrics">
+                        <div class="metric">99.9% Uptime</div>
+                        <div class="metric">&lt;100ms Response</div>
+                        <div class="metric">10k+ RPS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MongoDB & Database Design -->
+        <div class="tech-section">
+            <h3 class="tech-section-title">MongoDB & Database Design</h3>
+            <div class="mongodb-grid">
+                <div class="mongo-card">
+                    <h4>Advanced MongoDB</h4>
+                    <ul class="mongo-features">
+                        <li>Complex aggregation pipelines with $lookup, $unwind, $group</li>
+                        <li>Indexing strategies for query optimization</li>
+                        <li>Replica sets and sharding configuration</li>
+                        <li>GridFS for large file storage</li>
+                        <li>Change streams for real-time updates</li>
+                        <li>Transaction management across collections</li>
+                    </ul>
+                </div>
+                
+                <div class="mongo-card">
+                    <h4>Schema Design Patterns</h4>
+                    <ul class="mongo-features">
+                        <li>Embedded vs Referenced document strategies</li>
+                        <li>Polymorphic pattern implementation</li>
+                        <li>Bucket pattern for time-series data</li>
+                        <li>Tree structures (Materialized Path, Nested Sets)</li>
+                        <li>Denormalization for read optimization</li>
+                        <li>Schema versioning and migration strategies</li>
+                    </ul>
+                </div>
+                
+                <div class="mongo-card">
+                    <h4>Performance Tuning</h4>
+                    <ul class="mongo-features">
+                        <li>Query execution plan analysis</li>
+                        <li>Index optimization and compound indexes</li>
+                        <li>Memory usage optimization</li>
+                        <li>Read/Write concern configuration</li>
+                        <li>Connection pooling optimization</li>
+                        <li>Monitoring with MongoDB Compass</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cloud & DevOps -->
+        <div class="tech-section">
+            <h3 class="tech-section-title">Cloud Architecture & DevOps</h3>
+            <div class="cloud-grid">
+                <div class="cloud-card">
+                    <h4>AWS Expertise</h4>
+                    <div class="aws-services">
+                        <div class="service-group">
+                            <h5>Compute</h5>
+                            <span>EC2, Lambda, ECS, Fargate</span>
+                        </div>
+                        <div class="service-group">
+                            <h5>Storage</h5>
+                            <span>S3, EBS, EFS, Glacier</span>
+                        </div>
+                        <div class="service-group">
+                            <h5>Database</h5>
+                            <span>RDS, DynamoDB, ElastiCache</span>
+                        </div>
+                        <div class="service-group">
+                            <h5>Network</h5>
+                            <span>VPC, ALB, CloudFront, Route53</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cloud-card">
+                    <h4>Google Cloud Platform</h4>
+                    <div class="gcp-services">
+                        <div class="service-group">
+                            <h5>Compute</h5>
+                            <span>Compute Engine, Cloud Functions</span>
+                        </div>
+                        <div class="service-group">
+                            <h5>Data</h5>
+                            <span>Cloud Storage, Firestore, BigQuery</span>
+                        </div>
+                        <div class="service-group">
+                            <h5>AI/ML</h5>
+                            <span>Cloud ML Engine, Vision API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="cloud-card">
+                    <h4>CI/CD & Infrastructure</h4>
+                    <div class="devops-tools">
+                        <span class="tool-tag">Jenkins</span>
+                        <span class="tool-tag">Docker</span>
+                        <span class="tool-tag">Kubernetes</span>
+                        <span class="tool-tag">Terraform</span>
+                        <span class="tool-tag">GitHub Actions</span>
+                        <span class="tool-tag">GitLab CI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GitHub Repositories Showcase -->
+        <div class="tech-section">
+            <h3 class="tech-section-title">Open Source Contributions</h3>
+            <div class="github-showcase">
+                <div class="github-card">
+                    <div class="github-header">
+                        <h4>🚀 Featured Repositories</h4>
+                        <a href="https://github.com/VinayKumarPrajapati" class="github-link" target="_blank">View All on GitHub</a>
+                    </div>
+                    <div class="repo-grid">
+                        <div class="repo-item">
+                            <h5>microservices-architecture</h5>
+                            <p>Complete microservices setup with Docker, Kubernetes, and service discovery</p>
+                            <div class="repo-stats">
+                                <span>🌟 NodeJS</span>
+                                <span>🔧 Docker</span>
+                                <span>⚡ Kubernetes</span>
+                            </div>
+                        </div>
+                        
+                        <div class="repo-item">
+                            <h5>mongodb-optimization-toolkit</h5>
+                            <p>Performance optimization tools and best practices for MongoDB</p>
+                            <div class="repo-stats">
+                                <span>🗄️ MongoDB</span>
+                                <span>📊 Analytics</span>
+                                <span>🔧 Tools</span>
+                            </div>
+                        </div>
+                        
+                        <div class="repo-item">
+                            <h5>nodejs-performance-boilerplate</h5>
+                            <p>High-performance Node.js application template with best practices</p>
+                            <div class="repo-stats">
+                                <span>⚡ NodeJS</span>
+                                <span>🚀 Performance</span>
+                                <span>📈 Scalable</span>
+                            </div>
+                        </div>
+                        
+                        <div class="repo-item">
+                            <h5>system-design-patterns</h5>
+                            <p>Implementation of common system design patterns and architectures</p>
+                            <div class="repo-stats">
+                                <span>🏗️ Architecture</span>
+                                <span>📐 Patterns</span>
+                                <span>📚 Educational</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-content">
+            <p>Ready to build something amazing together? I'm always open to discussing new opportunities, innovative projects, and technical collaborations.</p>
+            <div class="contact-methods">
+                <a href="mailto:vinay91098@gmail.com" class="contact-method">
+                    <div class="contact-icon">📧</div>
+                    <div>Email</div>
+                </a>
+                <a href="tel:+919876386345" class="contact-method">
+                    <div class="contact-icon">📱</div>
+                    <div>Phone</div>
+                </a>
+                <a href="https://www.linkedin.com/in/vinay-prajapati-076/" class="contact-method" target="_blank">
+                    <div class="contact-icon">💼</div>
+                    <div>LinkedIn</div>
+                </a>
+                <a href="https://github.com/VinayKumarPrajapati" class="contact-method" target="_blank">
+                    <div class="contact-icon">🐙</div>
+                    <div>GitHub</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Vinay Prajapati.</p>
+    </footer>
+
+    <script>
+        // Animated background particles
+        function createParticles() {
+            const container = document.querySelector('.bg-animation');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Add some interactive elements
+        document.querySelectorAll('.skill-tag, .tech-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(2deg)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.experience-card, .project-card, .skill-category, .tech-card, .algo-category, .nodejs-card, .mongo-card, .cloud-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 15px 35px rgba(0, 255, 255, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Code snippet animation
+        document.querySelectorAll('.code-line').forEach((line, index) => {
+            line.style.animationDelay = `${index * 0.5}s`;
+            line.style.opacity = '0';
+            line.style.animation = 'slideUp 0.8s ease forwards';
+        });
+
+        // Repository items hover effect
+        document.querySelectorAll('.repo-item').forEach(repo => {
+            repo.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 10px 25px rgba(0, 255, 255, 0.3)';
+            });
+            
+            repo.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Tech highlights animation
+        document.querySelectorAll('.highlight-tag, .framework-tag, .tool-tag').forEach((tag, index) => {
+            tag.style.animationDelay = `${index * 0.1}s`;
+            tag.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 5px 15px rgba(0, 255, 255, 0.4)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Performance metrics animation
+        document.querySelectorAll('.metric').forEach((metric, index) => {
+            metric.style.animationDelay = `${index * 0.3}s`;
+            metric.style.opacity = '0';
+            metric.style.animation = 'slideUp 0.8s ease forwards';
+        });
+
+        // Service groups hover effect
+        document.querySelectorAll('.service-group').forEach(group => {
+            group.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 5px 15px rgba(255, 165, 0, 0.3)';
+            });
+            
+            group.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Smooth scrolling enhancement for technical section
+        document.querySelectorAll('.tech-section').forEach(section => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            observer.observe(section);
+        });
+
+        // Ideas & Innovations Modal Functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId + '-modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset animations for use cases
+            const useCases = modal.querySelectorAll('.use-case');
+            useCases.forEach((useCase, index) => {
+                useCase.style.animation = 'none';
+                setTimeout(() => {
+                    useCase.style.animation = `slideUpModal 0.6s ease forwards`;
+                    useCase.style.animationDelay = `${index * 0.1}s`;
+                }, 100);
+            });
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId + '-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            }
+        });
+
+        // Enhanced hover effects for idea cards
+        document.querySelectorAll('.idea-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (!this.style.cursor.includes('not-allowed')) {
+                    this.style.boxShadow = '0 25px 50px rgba(0, 255, 255, 0.3)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Animate idea tags on hover
+        document.querySelectorAll('.idea-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(2deg)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add floating animation to use case numbers
+        document.querySelectorAll('.use-case-number').forEach(number => {
+            number.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.2) rotate(10deg)';
+            });
+            
+            number.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Make functions globally accessible
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+    </script>
+</body>
+</html>
