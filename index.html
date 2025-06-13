@@ -473,6 +473,14 @@
             margin-bottom: 2rem;
         }
 
+        /* Architecture Section */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
         .idea-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
@@ -1294,6 +1302,9 @@
                 margin-left: 1rem; 
             }
             
+            /* Architecture section responsive */
+            .architecture-grid { grid-template-columns: 1fr; }
+            
             .github-header { 
                 flex-direction: column; 
                 text-align: center; 
@@ -1354,6 +1365,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#ideas">Ideas</a></li>
+                <li><a href="#architecture">Architecture</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#technical">Technical Deep Dive</a></li>
                 <li><a href="#contact">Contact</a></li>
